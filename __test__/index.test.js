@@ -27,3 +27,33 @@ describe('growUp', () => {
         expect(baby.fitness).toEqual(7);
     });
 });
+
+describe('walk', () => {
+    const baby = new Pet('Fido');
+    it('increases fitness by 4', () => {
+        baby.growUp();
+        baby.growUp();
+        baby.walk();
+        expect(baby.fitness).toEqual(8);
+    })
+    it('never increases past 10', () => {
+        baby.growUp();     
+        baby.walk();
+        baby.walk();
+        expect(baby.fitness).toEqual(10);
+    })
+})
+
+describe('fee', () => {
+    const baby = new Pet('Fido');
+    it('decreases hunger by 3', () => {
+        baby.growUp();
+        baby.feed();
+        expect(baby.hunger).toEqual(2);
+    })
+    it('doesnt allow hunger to go below 0', () => {
+        baby.hunger = 2;
+        baby.feed();
+        expect(baby.hunger).toEqual(0);
+    })
+})
