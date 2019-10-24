@@ -1,11 +1,29 @@
-MAXIMUM_FITNESS = 10;
-MINIMUM_HUNGER = 0;
+const MAXIMUM_FITNESS = 10;
+const MINIMUM_HUNGER = 0;
+const HUNGRY = 'I am hungry';
+const UNFIT = 'I need a walk';
+const HUNGRY_UNFIT = 'I am hungry AND I need a walk';
+const ALL_FINE = 'I feel great!';
+
 
 function Pet (name) {
     this.name = name
     this.age = 0;
     this.hunger = 0;
     this.fitness = MAXIMUM_FITNESS;
+}
+// Pet.prototype.isAlive = function(){};
+
+Pet.prototype = {
+    get isAlive() {
+      return this.age < 30 && this.hunger < 10 && this.fitness > 0;
+    }
+   
+  }
+
+ /*    Pet.prototype.isAlive = function() {
+        return this.age < 30 && this.hunger < 10 && this.fitness > 0;
+      } */
     
     Pet.prototype.growUp = function() {
         this.age += 1;
@@ -28,6 +46,24 @@ function Pet (name) {
             this.hunger = MINIMUM_HUNGER;
         }
     }
-   };
+
+    Pet.prototype.checkUp = function() {
+        if (this.fitness <= 3 && this.hunger >= 5) {
+            return HUNGRY_UNFIT;
+        }  if (this.fitness <= 3) {
+            return UNFIT;
+        } if (this.hunger >= 5) {
+            return HUNGRY;
+        } else { return ALL_FINE };
+    }
+
+    
+     
+     
+        
+      
+
+    
+
 
 module.exports = Pet;

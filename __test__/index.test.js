@@ -44,7 +44,7 @@ describe('walk', () => {
     })
 })
 
-describe('fee', () => {
+describe('feed', () => {
     const baby = new Pet('Fido');
     it('decreases hunger by 3', () => {
         baby.growUp();
@@ -55,5 +55,71 @@ describe('fee', () => {
         baby.hunger = 2;
         baby.feed();
         expect(baby.hunger).toEqual(0);
+    })
+})
+
+describe('checkUp', () => {
+    const baby = new Pet('Fido');
+    it('tells if baby is unfit', () => {
+        baby.fitness = 2;
+        baby.hunger = 0;
+        baby.checkUp();
+        expect(baby.checkUp()).toBe('I need a walk');
+    })
+    it('tells if baby is hungry', () => {
+        baby.hunger = 7;
+        baby.fitness = 9;
+        baby.checkUp();
+        expect(baby.checkUp()).toBe('I am hungry');
+    })
+    it('tells if baby is unfit and hungry', () => {
+        baby.fitness = 2;
+        baby.hunger = 7;
+        baby.checkUp();
+        expect(baby.checkUp()).toBe('I am hungry AND I need a walk');
+    })
+    it('tells if baby is perfectly fine thank you very much', () => {
+        baby.fitness = 8;
+        baby.hunger = 1;
+        // console.log(baby.checkUp());
+        expect(baby.checkUp()).toBe('I feel great!');
+    })
+    
+})
+
+/* if the pet's fitness is 0 or less, it should return false.
+
+if the pet's hunger is 10 or more, it should return false.
+
+if the pet's age is 30 or more, it should return false.
+
+otherwise it should return true. */
+
+describe('isAlive', () => {
+    let baby;
+    beforeEach(() => {
+        baby = new Pet('Fido');
+    })
+
+    it('tells if the baby is alive or dead', () => {
+        
+        expect(baby.isAlive).toBe(true);
+    })
+    it('tells if the baby is alive or dead', () => {
+        baby.hunger = 11;
+ 
+        expect(baby.isAlive).toBe(false);
+    })
+    it('tells if the baby is alive or dead', () => {
+        baby.age = 31;
+
+        expect(baby.isAlive).toBe(false);
+    })
+    it('tells if the baby is alive or dead', () => {
+        baby.fitness = 5;
+        baby.hunger = 5;
+        baby.age = 5;
+
+        expect(baby.isAlive).toBe(true);
     })
 })
