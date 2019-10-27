@@ -119,32 +119,36 @@ describe('isAlive', () => {
     beforeEach(() => {
         baby = new Pet('Fido');
     })
-
+    
     it('tells if the baby is alive or dead', () => {
         
         expect(baby.isAlive).toBe(true);
     })
     it('tells if the baby is alive or dead', () => {
         baby.hunger = 11;
- 
+        
         expect(baby.isAlive).toBe(false);
     })
     it('tells if the baby is alive or dead', () => {
         baby.age = 31;
-
+        
         expect(baby.isAlive).toBe(false);
     })
     it('tells if the baby is alive or dead', () => {
         baby.fitness = 5;
         baby.hunger = 5;
         baby.age = 5;
-
+        
         expect(baby.isAlive).toBe(true);
     })
 })
-/* 
-if the pet is not alive, the checkUp function should return 'Your pet is no longer alive :('
 
-if the pet is not alive, the walk, growUp and feed functions should each throw an exception 'Your pet is no longer alive :('.
-
-it the pet is alive, they should behave as before. */
+describe('haveBaby', () => {
+    const baby = new Pet('Fido');
+    baby.haveBaby('Jenny')
+    console.log(baby.children);
+    it('creates baby inside parent', () => {
+        expect(baby.children).toBeInstanceOf(Array);
+    })
+    
+})
