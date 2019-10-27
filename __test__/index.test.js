@@ -26,21 +26,31 @@ describe('growUp', () => {
         expect(baby.hunger).toEqual(5);
         expect(baby.fitness).toEqual(7);
     });
+    it('throws an error if the pet is DEAD', () => {
+        const baby = new Pet('Fido');
+        baby.age = 31;
+        expect(() => baby.growUp()).toThrow('Your pet is DEAD!');
+    })
 });
 
 describe('walk', () => {
-    const baby = new Pet('Fido');
+    
     it('increases fitness by 4', () => {
-        baby.growUp();
-        baby.growUp();
+        const baby = new Pet('Fido');
+        baby.fitness = 4;
         baby.walk();
         expect(baby.fitness).toEqual(8);
     })
     it('never increases past 10', () => {
-        baby.growUp();     
-        baby.walk();
+        const baby = new Pet('Fido');
+        baby.fitness = 9;
         baby.walk();
         expect(baby.fitness).toEqual(10);
+    })
+    it('throws an error if the pet is DEAD', () => {
+        const baby = new Pet('Fido');
+        baby.fitness = 0;
+        expect(() => baby.walk()).toThrow('Your pet is DEAD!');
     })
 })
 
@@ -55,6 +65,10 @@ describe('feed', () => {
         baby.hunger = 2;
         baby.feed();
         expect(baby.hunger).toEqual(0);
+    })
+    it('throws an error if the pet is DEAD', () => {
+        baby.age = 30;
+        expect(() => baby.feed()).toThrow('Your pet is DEAD!');
     })
 })
 
@@ -81,8 +95,13 @@ describe('checkUp', () => {
     it('tells if baby is perfectly fine thank you very much', () => {
         baby.fitness = 8;
         baby.hunger = 1;
-        // console.log(baby.checkUp());
         expect(baby.checkUp()).toBe('I feel great!');
+    })
+    it('tells if baby is no longer with us', () => {
+        baby.fitness = 0;
+        baby.hunger = 10;
+        baby.age = 30;
+        expect(() => baby.checkUp()).toThrow('Your pet is DEAD!');
     })
     
 })
@@ -123,3 +142,9 @@ describe('isAlive', () => {
         expect(baby.isAlive).toBe(true);
     })
 })
+/* 
+if the pet is not alive, the checkUp function should return 'Your pet is no longer alive :('
+
+if the pet is not alive, the walk, growUp and feed functions should each throw an exception 'Your pet is no longer alive :('.
+
+it the pet is alive, they should behave as before. */
