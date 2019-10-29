@@ -5,6 +5,7 @@ const UNFIT = 'I need a walk';
 const HUNGRY_UNFIT = 'I am hungry AND I need a walk';
 const ALL_FINE = 'I feel great!';
 const DEAD_PETS = 'Your pet is DEAD!';
+// let children = [];
 
 
 function Pet (name) {
@@ -12,6 +13,7 @@ function Pet (name) {
     this.age = 0;
     this.hunger = 0;
     this.fitness = MAXIMUM_FITNESS;
+    this.children = [];
 }
 
 Pet.prototype = {
@@ -77,18 +79,22 @@ Pet.prototype.checkUp = function() {
         return HUNGRY;
     } else { return ALL_FINE };
 }
-
+// children = [];
 Pet.prototype.haveBaby = function(babyName) {
     
-    Pet.prototype.children.push(new Pet(babyName));
-    
+    const child = new Pet(babyName);
+    child.parent = this.name;
+    this.children.push(child.name);
+}   
+
+
 //if i put children array inside function it resets everytime its run
 //and so only ever has the latest child in the array
-}
 
-Pet.prototype.children = [];
+
+// Pet.prototype.children = [];
 //if i put the children array outside the function, all the babies 
-//have the children in their thing as well even thought they arent the parents
+//have the children in their thing as well even thought they arent the parent
 
 
 
